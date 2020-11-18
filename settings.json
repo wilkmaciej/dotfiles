@@ -66,8 +66,8 @@
 	"editor.suggest.showEnumMembers": false,
 	"editor.suggest.showEvents": false,
 	"editor.suggest.showFields": false,
-	"editor.suggest.showFiles": false,
-	"editor.suggest.showFolders": false,
+	// "editor.suggest.showFiles": false,
+	// "editor.suggest.showFolders": false,
 	"editor.suggest.showIcons": false,
 	"editor.suggest.showIssues": false,
 	"editor.suggest.showInterfaces": false,
@@ -85,5 +85,5 @@
 	"editor.suggest.showValues": false,
 	"editor.suggest.showWords": false,
 	"git-graph.repository.showRemoteHeads": false,
-	"git-graph.repository.commits.fetchAvatars": true
+	"git-graph.repository.commits.fetchAvatars": true,
 }
