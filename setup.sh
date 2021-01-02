@@ -26,7 +26,7 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 #	all apps
 sudo apt update
 
-sudo apt install -y gnome-session gnome-terminal gnome-system-monitor gnome-tweaks nautilus nautilus-admin openssh-server git gparted google-chrome-stable code spotify-client zsh vlc eog fonts-powerline xclip binutils nmap gobuster curl
+sudo apt install -y gnome-session gnome-terminal gnome-system-monitor gnome-tweaks nautilus nautilus-admin openssh-server git gparted google-chrome-stable code spotify-client zsh vlc eog fonts-powerline xclip binutils nmap gobuster curl spotifyd
 
 sudo apt purge -y --auto-remove gedit gnome-user-docs info
 
