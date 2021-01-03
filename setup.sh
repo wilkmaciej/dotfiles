@@ -82,3 +82,5 @@ wget -O- https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-
 curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo setcap 'cap_net_bind_service=+ep' `which node`
+
+printf "\n\n\n          DONE \n\n\n"
