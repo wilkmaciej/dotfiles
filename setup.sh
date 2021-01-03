@@ -40,7 +40,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/
 
 #	vs code
 
-echo `
+echo '
 aaron-bond.better-comments
 christian-kohler.path-intellisense
 CoenraadS.bracket-pair-colorizer-2
@@ -51,7 +51,7 @@ ms-python.python
 ms-toolsai.jupyter
 TabNine.tabnine-vscode
 VisualStudioExptTeam.vscodeintellicode
-` | xargs -L1 code --install-extension
+' | xargs -L1 code --install-extension
 
 mkdir -p ~/.config/Code/User/
 cp ./vscode ~/.config/Code/User/settings.json
