@@ -50,7 +50,6 @@
 	},
 	"git.confirmSync": false,
 	"javascript.format.semicolons": "remove",
-	"terminal.integrated.shell.linux": "/usr/bin/bash",
 	"git-graph.commitDetailsView.location": "Docked to Bottom",
 	"git-graph.date.format": "ISO Date & Time",
 	"diffEditor.ignoreTrimWhitespace": false,
@@ -86,4 +85,11 @@
 	"editor.suggest.showWords": false,
 	"git-graph.repository.showRemoteHeads": false,
 	"git-graph.repository.commits.fetchAvatars": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true
+	},
+	"auto-close-tag.disableOnLanguage": [
+		"javascript"
+	],
+	"terminal.integrated.fontFamily": "PowerlineSymbols, monospace"
 }
