@@ -24,8 +24,8 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 
 
 #	all apps
-sudo apt update
 
+sudo apt upgrade -y
 sudo apt install -y gnome-session gnome-terminal gnome-system-monitor gnome-tweaks nautilus nautilus-admin openssh-server git gparted google-chrome-stable code spotify-client zsh vlc eog fonts-powerline xclip binutils nmap gobuster curl net-tools
 
 sudo apt purge -y --auto-remove gedit gnome-user-docs info
@@ -69,13 +69,30 @@ dbus-launch dconf load / < ./dconf
 sudo cp ./netplan /etc/netplan/01-netcfg.yaml
 sudo netplan apply
 
+# create apps folder
+
+mkdir ~/apps/
+
 #	Postman
 
-wget -O- https://dl.pstmn.io/download/latest/linux64 | tar -xzC ~/
+wget -O- https://dl.pstmn.io/download/latest/linux64 | tar -xzC ~/apps/
 
 # Spotifyd
 
-wget -O- https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-full.tar.gz | tar -xzC ~/
+wget -O- https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-full.tar.gz | tar -xzC ~/apps/
+
+# Git Vanity
+
+git clone https://github.com/tochev/git-vanity.git ~/apps/git-vanity/
+
+# Hashcat
+
+sudo apt install -y make gcc g++
+git clone https://github.com/hashcat/hashcat.git /dev/shm/hashcat
+cd /dev/shm/hashcat
+make
+sudo make install
+cd ~
 
 #	Node
 
