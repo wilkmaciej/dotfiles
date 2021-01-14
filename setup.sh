@@ -25,6 +25,7 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 
 #	all apps
 
+sudo apt update
 sudo apt upgrade -y
 sudo apt install -y gnome-session gnome-terminal gnome-system-monitor gnome-tweaks nautilus nautilus-admin openssh-server git gparted google-chrome-stable code spotify-client zsh vlc eog fonts-powerline xclip binutils nmap gobuster curl net-tools
 
@@ -54,7 +55,7 @@ VisualStudioExptTeam.vscodeintellicode
 ' | xargs -L1 code --install-extension
 
 mkdir -p ~/.config/Code/User/
-cp ./vscode ~/.config/Code/User/settings.json
+cp ./settings.json ~/.config/Code/User/settings.json
 
 #	themes
 
@@ -63,11 +64,6 @@ sudo unzip ./apperence.zip -d /usr/share
 export DISPLAY=":0"
 
 dbus-launch dconf load / < ./dconf
-
-#	network
-
-sudo cp ./netplan /etc/netplan/01-netcfg.yaml
-sudo netplan apply
 
 # create apps folder
 
@@ -89,15 +85,21 @@ git clone https://github.com/tochev/git-vanity.git ~/apps/git-vanity/
 
 sudo apt install -y make gcc g++
 git clone https://github.com/hashcat/hashcat.git /dev/shm/hashcat
+CURRENT_DIR=$(pwd)
 cd /dev/shm/hashcat
 make
 sudo make install
-cd ~
+cd $CURRENT_DIR
 
 #	Node
 
 curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo setcap 'cap_net_bind_service=+ep' `which node`
+
+#	network		!!!! DO IT AS LAST STEP
+
+sudo cp ./netplan /etc/netplan/01-netcfg.yaml
+sudo netplan apply
 
 printf "\n\n\n          DONE \n\n\n"
