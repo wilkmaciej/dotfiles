@@ -60,9 +60,7 @@ cp ./settings.json ~/.config/Code/User/settings.json
 #	themes
 
 sudo unzip ./apperence.zip -d /usr/share
-
 export DISPLAY=":0"
-
 dbus-launch dconf load / < ./dconf
 
 # create apps folder
