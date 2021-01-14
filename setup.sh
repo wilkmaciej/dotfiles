@@ -63,7 +63,7 @@ sudo unzip ./apperence.zip -d /usr/share
 export DISPLAY=":0"
 dbus-launch dconf load / < ./dconf
 
-# create apps folder
+#	create apps folder
 
 mkdir ~/apps/
 
@@ -71,15 +71,15 @@ mkdir ~/apps/
 
 wget -O- https://dl.pstmn.io/download/latest/linux64 | tar -xzC ~/apps/
 
-# Spotifyd
+#	Spotifyd
 
 wget -O- https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-full.tar.gz | tar -xzC ~/apps/
 
-# Git Vanity
+#	Git Vanity
 
 git clone https://github.com/tochev/git-vanity.git ~/apps/git-vanity/
 
-# Hashcat
+#	Hashcat
 
 sudo apt install -y make gcc g++
 git clone https://github.com/hashcat/hashcat.git /dev/shm/hashcat
@@ -95,7 +95,7 @@ curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo setcap 'cap_net_bind_service=+ep' `which node`
 
-#	network		!!!! DO IT AS LAST STEP
+#	Network		!!!! DO IT AS LAST STEP
 
 sudo cp ./netplan /etc/netplan/01-netcfg.yaml
 sudo netplan apply
