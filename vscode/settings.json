@@ -91,5 +91,5 @@
 	"auto-close-tag.disableOnLanguage": [
 		"javascript"
 	],
-	"terminal.integrated.fontFamily": "PowerlineSymbols, monospace"
+	"terminal.integrated.fontFamily": "PowerlineSymbols, monospace",
 }
