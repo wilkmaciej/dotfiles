@@ -50,12 +50,13 @@ formulahendry.auto-rename-tag
 mhutchie.git-graph
 ms-python.python
 ms-toolsai.jupyter
+ms-vscode.vscode-typescript-next
 TabNine.tabnine-vscode
 VisualStudioExptTeam.vscodeintellicode
 ' | xargs -L1 code --install-extension
 
 mkdir -p ~/.config/Code/User/
-cp ./settings.json ~/.config/Code/User/settings.json
+cp ./vscode/* ~/.config/Code/User/
 
 #	themes
 
