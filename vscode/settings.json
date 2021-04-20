@@ -88,8 +88,16 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll": true
 	},
-	"auto-close-tag.disableOnLanguage": [
-		"javascript"
-	],
 	"terminal.integrated.fontFamily": "PowerlineSymbols, monospace",
+	"files.exclude": {
+		"**/node_modules": true,
+		"**/build": true
+	},
+	"debug.onTaskErrors": "debugAnyway",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"workbench.colorTheme": "The Best Theme",
+	"editor.fontFamily": "JetBrains Mono",
+	"editor.fontLigatures": true,
+	"workbench.iconTheme": "material-icon-theme",
+	"editor.linkedEditing": true
 }
