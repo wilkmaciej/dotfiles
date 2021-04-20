@@ -45,12 +45,13 @@ echo '
 aaron-bond.better-comments
 christian-kohler.path-intellisense
 CoenraadS.bracket-pair-colorizer-2
-formulahendry.auto-close-tag
-formulahendry.auto-rename-tag
+kohlbachjan.the-best-theme
 mhutchie.git-graph
 ms-python.python
 ms-toolsai.jupyter
 ms-vscode.vscode-typescript-next
+PKief.material-icon-theme
+streetsidesoftware.code-spell-checker
 TabNine.tabnine-vscode
 VisualStudioExptTeam.vscodeintellicode
 ' | xargs -L1 code --install-extension
