@@ -22,15 +22,6 @@ topbar-preview-size=40
 [org/gnome/shell/extensions/clock_override]
 override-string='%d/%m %T'
 
-[org/gnome/shell/extensions/cpupower]
-default-ac-profile='3258858491'
-default-battery-profile='3837984415'
-profiles=[(0, 10, false, 'Energy Saver', '3837984415'), (10, 100, true, 'Normal', '3258858491')]
-show-arrow-in-taskbar=false
-show-freq-in-taskbar=true
-show-icon-in-taskbar=true
-taskbar-freq-unit-ghz=true
-
 [org/gnome/shell/extensions/dash-to-dock]
 animate-show-apps=false
 click-action='previews'
@@ -47,10 +38,6 @@ shift-middle-click-action='launch'
 show-mounts=false
 show-trash=false
 transparency-mode='DYNAMIC'
-
-[org/gnome/shell/extensions/desktop-icons]
-show-home=false
-show-trash=false
 
 [org/gnome/shell/extensions/simpleroffmenu]
 merge-logout-poweroff=false
