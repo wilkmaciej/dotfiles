@@ -6,17 +6,10 @@ plugins=(
 	zsh-autosuggestions
 	zsh-syntax-highlighting
 	colored-man-pages
+	command-not-found
+	brew
+	adb
+	osx
 )
 
-alias apt="sudo apt"
-
 source $ZSH/oh-my-zsh.sh
-
-xc() {
-	xclip $@
-	xclip -o | xclip -selection clipboard
-}
-
-xv() {
-	xclip -o
-}
