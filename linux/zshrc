@@ -1,0 +1,10 @@
+alias apt="sudo apt"
+
+xc() {
+	xclip $@
+	xclip -o | xclip -selection clipboard
+}
+
+xv() {
+	xclip -o
+}
