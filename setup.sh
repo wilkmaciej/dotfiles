@@ -11,7 +11,7 @@ if [[ "$(uname)" =~ Darwin ]]; then
 
 	#	install brew apps
 	brew install --cask google-chrome visual-studio-code spotify
-	brew install binutils nmap gobuster wget
+	brew install binutils nmap gobuster wget gpg
 
 else
 	#	LINUX
