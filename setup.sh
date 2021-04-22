@@ -53,7 +53,12 @@ cp ./zshrc ~/.zshrc
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
-if [[ "$(uname)" =~ Darwin ]]; then else
+if [[ "$(uname)" =~ Darwin ]]; then
+	open ./macos/JetBrainsMono.ttf
+	open ./macos/Argonaut.terminal
+	defaults write com.apple.terminal "Default Window Settings" "Argonaut"
+	defaults write com.apple.terminal "Startup Window Settings" "Argonaut"
+else
 	sudo chsh -s `which zsh` $USER
 	cat ./linux/zshrc >> ~/.zshrc
 fi
