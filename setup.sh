@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#	ask for sudo acces at start
+sudo -v
+
 if [[ "$(uname)" =~ Darwin ]]; then
 	#	macOS
 
@@ -9,9 +12,13 @@ if [[ "$(uname)" =~ Darwin ]]; then
 	#	install brew
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+	#	update brew
+	brew update
+	brew upgrade
+
 	#	install brew apps
-	brew install --cask google-chrome visual-studio-code spotify
-	brew install binutils nmap gobuster wget gpg
+	brew install --cask google-chrome visual-studio-code spotify vlc android-platform-tools ngrok gpg-suite
+	brew install binutils nmap gobuster wget telnet arp-scan
 
 else
 	#	LINUX
@@ -46,22 +53,22 @@ else
 	sudo apt purge -y --auto-remove gedit gnome-user-docs info
 fi
 
-
-#	zsh
-sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
-cp ./zshrc ~/.zshrc
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+#	terminal/zsh
 
 if [[ "$(uname)" =~ Darwin ]]; then
-	open ./macos/JetBrainsMono.ttf
-	open ./macos/Argonaut.terminal
+	cp ./macos/JetBrainsMono.ttf ~/Library/Fonts
+	open ./macos/Argonaut.terminal && osascript -e 'delay 1' -e 'tell application "Terminal" to close front window'
 	defaults write com.apple.terminal "Default Window Settings" "Argonaut"
 	defaults write com.apple.terminal "Startup Window Settings" "Argonaut"
+	cp ./zshrc ~/.zshrc
 else
+	sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
 	sudo chsh -s `which zsh` $USER
-	cat ./linux/zshrc >> ~/.zshrc
+	cat ./zshrc ./linux/zshrc > ~/.zshrc
 fi
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 #	vs code
 echo '
@@ -80,24 +87,70 @@ VisualStudioExptTeam.vscodeintellicode
 ' | xargs -L1 code --install-extension
 
 if [[ "$(uname)" =~ Darwin ]]; then
-	VS_CODE_DIR="~/Library/Application\ Support/Code/User/"
+	VS_CODE_DIR=~/Library/Application\ Support/Code/User/
 else
-	VS_CODE_DIR="~/.config/Code/User/"
+	VS_CODE_DIR=~/.config/Code/User/
 fi
 
 mkdir -p $VS_CODE_DIR
 cp ./vscode/* $VS_CODE_DIR
 
-#	create apps folder
-mkdir ~/apps/
+if [[ "$(uname)" =~ Darwin ]]; then
 
-if [[ "$(uname)" =~ Darwin ]]; then else
+	#	macOS
+
+	#	System preferences
+
+	#	Disable the “Are you sure you want to open this application?” dialog
+	defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+	#	Disable the warning when changing a file extension
+	defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+	#	Enable opening folder on hover while holding item
+	defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+
+	#	Avoid creating .DS_Store files on network or USB volumes
+	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+	defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+	#	Expand the following File Info panes:
+	#	“General”, “Open with”, and “Sharing & Permissions”
+	defaults write com.apple.finder FXInfoPanesExpanded -dict \
+		General -bool true \
+		OpenWith -bool true \
+		Privileges -bool true
+	
+	#	Enable the automatic update check
+	defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+
+	#	Check for software updates daily, not just once per week
+	defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+	#	Download newly available updates in background
+	defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+
+	#	Install System data files & security updates
+	defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+
+	#	Turn on app auto-update
+	defaults write com.apple.commerce AutoUpdate -bool true
+
+	#	Use AirDrop over every interface
+	defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+
+	#	Restart automatically if the computer freezes
+	sudo systemsetup -setrestartfreeze on
+else
 	#	LINUX
 
 	#	themes
 	sudo unzip ./linux/apperence.zip -d /usr/share
 	export DISPLAY=":0"
 	dbus-launch dconf load / < ./linux/dconf
+
+	#	create apps folder
+	mkdir ~/apps/
 
 	#	Postman
 	wget -O- https://dl.pstmn.io/download/latest/linux64 | tar -xzC ~/apps/
