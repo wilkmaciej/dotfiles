@@ -78,13 +78,15 @@ CoenraadS.bracket-pair-colorizer-2
 kohlbachjan.the-best-theme
 mhutchie.git-graph
 ms-python.python
+ms-python.vscode-pylance
 ms-toolsai.jupyter
 ms-vscode.vscode-typescript-next
 PKief.material-icon-theme
+rangav.vscode-thunder-client
 streetsidesoftware.code-spell-checker
 TabNine.tabnine-vscode
 VisualStudioExptTeam.vscodeintellicode
-' | xargs -L1 code --install-extension
+' | xargs -n1 code --install-extension
 
 if [[ "$(uname)" =~ Darwin ]]; then
 	VS_CODE_DIR=~/Library/Application\ Support/Code/User/
