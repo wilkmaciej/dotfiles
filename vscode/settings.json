@@ -21,7 +21,6 @@
 	"editor.tabCompletion": "on",
 	"editor.wordWrap": "on",
 	"editor.cursorSmoothCaretAnimation": true,
-	"editor.find.addExtraSpaceOnTop": false,
 	"editor.find.autoFindInSelection": "multiline",
 	"editor.fontFamily": "JetBrains Mono",
 	"editor.formatOnPaste": true,
@@ -103,4 +102,6 @@
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
 	"diffEditor.renderIndicators": false,
+	"gitlens.currentLine.enabled": false,
+	"gitlens.hovers.currentLine.over": "line",
 }
