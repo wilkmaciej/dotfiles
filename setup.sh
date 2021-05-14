@@ -17,8 +17,31 @@ if [[ "$(uname)" =~ Darwin ]]; then
 	brew upgrade
 
 	#	install brew apps
-	brew install --cask google-chrome visual-studio-code spotify vlc android-platform-tools ngrok gpg-suite
-	brew install binutils nmap gobuster wget telnet arp-scan
+	echo '
+	google-chrome
+	chrome-remote-desktop-host
+	visual-studio-code
+	spotify
+	vlc
+	android-platform-tools
+	ngrok
+	gpg-suite
+	' | xargs -n1 brew install --cask
+
+	echo '
+	binutils
+	nmap
+	gobuster
+	wget
+	telnet
+	arp-scan
+	wireshark
+	zsh-completions
+	node
+	eslint
+	typescript
+	watch
+	' | xargs -n1 brew install
 
 else
 	#	LINUX
@@ -75,11 +98,15 @@ echo '
 aaron-bond.better-comments
 christian-kohler.path-intellisense
 CoenraadS.bracket-pair-colorizer-2
+dbaeumer.vscode-eslint
+eamodio.gitlens
 kohlbachjan.the-best-theme
 mhutchie.git-graph
 ms-python.python
 ms-python.vscode-pylance
 ms-toolsai.jupyter
+ms-vscode-remote.remote-ssh
+ms-vscode-remote.remote-ssh-edit
 ms-vscode.vscode-typescript-next
 PKief.material-icon-theme
 rangav.vscode-thunder-client
