@@ -205,6 +205,8 @@
 	<string>Argonaut</string>
 	<key>rowCount</key>
 	<integer>50</integer>
+	<key>shellExitAction</key>
+	<integer>0</integer>
 	<key>type</key>
 	<string>Window Settings</string>
 </dict>
