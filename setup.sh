@@ -6,11 +6,28 @@ sudo -v
 if [[ "$(uname)" =~ Darwin ]]; then
 	#	macOS
 
+	#	Enable TouchID for sudo access
+	sudo cp ./macos/pamd_sudo /etc/pam.d/sudo
+
 	#	install CLT for Xcode
 	xcode-select --install
+	
+	#	wait for CLT to install
+	while
+		xcode-select -p 1>/dev/null 2>/dev/null
+		[[ $? -eq 2 ]]
+	do
+		sleep 0.5
+	done
+
+	#	install Rosetta
+	echo "A" | sudo softwareupdate --install-rosetta
 
 	#	install brew
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/wilkmaciej/.zprofile
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 
 	#	update brew
 	brew update
@@ -18,30 +35,60 @@ if [[ "$(uname)" =~ Darwin ]]; then
 
 	#	install brew apps
 	echo '
-	google-chrome
-	chrome-remote-desktop-host
-	visual-studio-code
-	spotify
-	vlc
+	android-file-transfer
 	android-platform-tools
-	ngrok
+	balenaetcher
+	chrome-remote-desktop-host
+	google-chrome
 	gpg-suite
+	inssider
+	nrlquaker-winbox
+	raycast
+	rectangle
+	spotify
+	stats
+	visual-studio-code
+	vlc
+	wireshark
 	' | xargs -n1 brew install --cask
 
 	echo '
-	binutils
-	nmap
-	gobuster
-	wget
-	telnet
 	arp-scan
-	wireshark
-	zsh-completions
-	node
+	binutils
 	eslint
+	gobuster
+	mas
+	nmap
+	node
+	screen
+	sleepwatcher
+	telnet
 	typescript
 	watch
+	wget
+	zsh-completions
 	' | xargs -n1 brew install
+
+	#	open AppStore
+	mas open
+
+	#	Wait for AppStore login
+	while
+		mas account 1>/dev/null 2>/dev/null
+		[[ $? -eq 1 ]]
+	do
+		sleep 0.5
+	done
+
+	osascript -e 'delay 1' -e 'tell application "App Store" to quit'
+
+	echo '
+	1295203466	Microsoft Remote Desktop
+	1494023538	Plash
+	1543920362	Displaperture
+	595191960	CopyClip
+	824183456	Affinity Photo
+	' | awk '{ print $1 }' | xargs -n1 mas install
 
 else
 	#	LINUX
@@ -78,20 +125,20 @@ fi
 
 #	terminal/zsh
 
+sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
+git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
 if [[ "$(uname)" =~ Darwin ]]; then
-	cp ./macos/JetBrainsMono.ttf ~/Library/Fonts
+	cp ./macos/JetBrainsMono.ttf $HOME/Library/Fonts
 	open ./macos/Argonaut.terminal && osascript -e 'delay 1' -e 'tell application "Terminal" to close front window'
 	defaults write com.apple.terminal "Default Window Settings" "Argonaut"
 	defaults write com.apple.terminal "Startup Window Settings" "Argonaut"
-	cp ./zshrc ~/.zshrc
+	cp ./zshrc $HOME/.zshrc
 else
-	sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
 	sudo chsh -s `which zsh` $USER
-	cat ./zshrc ./linux/zshrc > ~/.zshrc
+	cat ./zshrc ./linux/zshrc > $HOME/.zshrc
 fi
-
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 #	vs code
 echo '
@@ -100,25 +147,31 @@ christian-kohler.path-intellisense
 CoenraadS.bracket-pair-colorizer-2
 dbaeumer.vscode-eslint
 eamodio.gitlens
+esbenp.prettier-vscode
+GitHub.copilot
 kohlbachjan.the-best-theme
 mhutchie.git-graph
 ms-python.python
 ms-python.vscode-pylance
 ms-toolsai.jupyter
+ms-toolsai.jupyter-keymap
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 ms-vscode.vscode-typescript-next
 PKief.material-icon-theme
 rangav.vscode-thunder-client
+richie5um2.vscode-sort-json
 streetsidesoftware.code-spell-checker
 TabNine.tabnine-vscode
+Tyriar.sort-lines
 VisualStudioExptTeam.vscodeintellicode
+yzhang.markdown-all-in-one
 ' | xargs -n1 code --install-extension
 
 if [[ "$(uname)" =~ Darwin ]]; then
-	VS_CODE_DIR=~/Library/Application\ Support/Code/User/
+	VS_CODE_DIR=$HOME/Library/Application\ Support/Code/User/
 else
-	VS_CODE_DIR=~/.config/Code/User/
+	VS_CODE_DIR=$HOME/.config/Code/User/
 fi
 
 mkdir -p $VS_CODE_DIR
@@ -128,48 +181,8 @@ if [[ "$(uname)" =~ Darwin ]]; then
 
 	#	macOS
 
-	#	System preferences
-
-	#	Disable the “Are you sure you want to open this application?” dialog
-	defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-	#	Disable the warning when changing a file extension
-	defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-	#	Enable opening folder on hover while holding item
-	defaults write NSGlobalDomain com.apple.springing.enabled -bool true
-
-	#	Avoid creating .DS_Store files on network or USB volumes
-	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-	defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-	#	Expand the following File Info panes:
-	#	“General”, “Open with”, and “Sharing & Permissions”
-	defaults write com.apple.finder FXInfoPanesExpanded -dict \
-		General -bool true \
-		OpenWith -bool true \
-		Privileges -bool true
+	./macos/defaults.sh
 	
-	#	Enable the automatic update check
-	defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
-
-	#	Check for software updates daily, not just once per week
-	defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
-
-	#	Download newly available updates in background
-	defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
-
-	#	Install System data files & security updates
-	defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
-
-	#	Turn on app auto-update
-	defaults write com.apple.commerce AutoUpdate -bool true
-
-	#	Use AirDrop over every interface
-	defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
-
-	#	Restart automatically if the computer freezes
-	sudo systemsetup -setrestartfreeze on
 else
 	#	LINUX
 
@@ -180,12 +193,6 @@ else
 
 	#	create apps folder
 	mkdir ~/apps/
-
-	#	Postman
-	wget -O- https://dl.pstmn.io/download/latest/linux64 | tar -xzC ~/apps/
-
-	#	Spotifyd
-	wget -O- https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-full.tar.gz | tar -xzC ~/apps/
 
 	#	Git Vanity
 	git clone https://github.com/tochev/git-vanity.git ~/apps/git-vanity/
