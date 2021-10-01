@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stars</title>
+	<script>
+		randomInt = (a = 0, b) => {
+			if (b == undefined) {
+				b = a
+				a = 0
+			}
+			return Math.round(Math.random() * (b - a) + a)
+		}
+		weightedRandomInt = (a, b, c = 2) => Math.round(ratio(a, b, Math.random() ** c))
+		ratio = (min, max, ratio) => min + (max - min) * ratio
+		addEventListener('DOMContentLoaded', () => {
+
+			const clock = document.body.appendChild(document.createElement('span'))
+			clock.classList.add('clock')
+
+			const colors = ['#baa002', '#0000ff']
+
+			const starParent = document.body.appendChild(document.createElement('span'))
+			starParent.classList.add('stars')
+
+			const times = [40, 60]
+
+			while (starParent.children.length < 200) {
+				const star = starParent.appendChild(document.createElement('span'))
+				const size = weightedRandomInt(1, 6, 5)
+				star.style.width = size + 'px'
+				star.style.height = size + 'px'
+				star.style.left = randomInt(100 * 100) / 100 + 'vw'
+
+				const duration = ratio(times[0], times[1], (size - 1) / 5) * 1000
+
+				const starAnimation = new Animation(new KeyframeEffect(
+					star,
+					[
+						{ transform: 'translateY(101vh)' },
+						{ transform: 'translateY(-1vh)' }
+					],
+					{
+						duration: duration,
+						fill: 'backwards',
+						iterations: Infinity,
+						delay: -randomInt(1000 * 1000)
+					}
+				))
+				starAnimation.play()
+				starAnimation.onfinish = () => starAnimation.currentTime = duration
+			}
+
+			// let minutes = 0
+			let lastDate = false
+			setInterval(() => {
+				const now = new Date();
+				if (lastDate && lastDate.getSeconds() == now.getSeconds()) return
+				lastDate = now
+				// now.setHours(12, 0, 0)
+				// now.setHours(parseInt(minutes / 60)%24, minutes % 60, 0)
+				// minutes += 10
+				clock.innerHTML =
+					[
+						now.getHours(),
+						now.getMinutes(),
+						now.getSeconds(),
+					].map(a => a.toString().padStart(2, '0')).join(':')
+
+				const d12 = new Date()
+				d12.setHours(12, 0, 0, 0)
+
+				const sunRatio = Math.abs(d12.getTime() - now.getTime()) / 12 / 60 / 60 / 1000
+
+				const color = colors.map(a => a.slice(1).match(/.{1,2}/g).map(a => parseInt(a, 16))).reduce((a, b) => a.map((c, d) => c = Math.sqrt(parseInt((c ** 2 * (1 - sunRatio) + b[d] ** 2 * sunRatio) / 2)))).join(', ')
+
+				document.body.style.background = `rgb(${color}) radial-gradient(circle at center ${parseInt(ratio(-10, 150, sunRatio))}%, transparent, black 110vh)`
+
+				for (let star of starParent.children) star.getAnimations()[0].playbackRate = sunRatio > 0.5 ? 1 : -1
+			}, 100)
+		})
+	</script>
+	<style>
+		html,
+		body {
+			padding: 0;
+			margin: 0;
+			width: 100vw;
+			height: 100vh;
+			overflow: hidden;
+		}
+
+		body.r .stars * {
+			animation-direction: reverse;
+		}
+
+		.stars * {
+			position: absolute;
+			background: #fff;
+			border-radius: 50%;
+			animation-name: move;
+			animation-duration: 1s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		.clock {
+			position: absolute;
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: 'Roboto Mono', sans-serif;
+			font-size: 13vh;
+			color: #fff;
+			z-index: 999;
+		}
+	</style>
+</head>
+
+<body>
+</body>
+
+</html>
