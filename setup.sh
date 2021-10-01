@@ -72,6 +72,8 @@ if [[ "$(uname)" =~ Darwin ]]; then
 	#	open AppStore
 	mas open
 
+	osascript -e 'display alert "Log in to Apple Store" as informational'
+
 	#	Wait for AppStore login
 	while
 		mas account 1>/dev/null 2>/dev/null
