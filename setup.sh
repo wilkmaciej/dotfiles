@@ -7,7 +7,9 @@ if [[ "$(uname)" =~ Darwin ]]; then
 	#	macOS
 
 	#	Enable TouchID for sudo access
-	sudo cp ./macos/pamd_sudo /etc/pam.d/sudo
+	if ! grep 'pam_tid.so' /etc/pam.d/sudo --silent; then
+		sudo sed -i -e '1s;^;auth       sufficient     pam_tid.so\n;' /etc/pam.d/sudo
+	fi
 
 	#	install CLT for Xcode
 	xcode-select --install
