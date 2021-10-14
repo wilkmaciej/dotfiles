@@ -28,7 +28,6 @@ if [[ "$(uname)" =~ Darwin ]]; then
 	#	install brew
 	printf "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/wilkmaciej/.zprofile
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 
 	#	update brew

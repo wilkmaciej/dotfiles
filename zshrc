@@ -16,6 +16,8 @@ DISABLE_UPDATE_PROMPT=true
 
 source $ZSH/oh-my-zsh.sh
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 alias p1="ping 1.1.1.1"
 
 alias upg="brew update && brew upgrade && mas upgrade && softwareupdate -i -a"
