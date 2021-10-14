@@ -43,6 +43,7 @@ if [[ "$(uname)" =~ Darwin ]]; then
 	google-chrome
 	gpg-suite
 	inssider
+	inssider
 	nrlquaker-winbox
 	raycast
 	rectangle
