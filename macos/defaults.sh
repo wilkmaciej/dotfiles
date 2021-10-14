@@ -132,7 +132,7 @@ tell application "System Preferences"
 	activate
 	reveal anchor "keyboardTab" of pane "com.apple.preference.keyboard"
 end tell
-tell application "System Events" to tell process "System Preferences"
+tell application "System Events" to tell application process "System Preferences"
 	delay 1
 	tell tab group 1 of window 1
 		set value of every slider to 10
@@ -150,7 +150,7 @@ tell application "System Preferences"
 	activate
 	reveal anchor "shortcutsTab" of pane "com.apple.preference.keyboard"
 end tell
-tell application "System Events" to tell process "System Preferences"
+tell application "System Events" to tell application process "System Preferences"
 	delay 1
 	tell checkbox 1 of tab group 1 of window 1
 		if not (its value as boolean) then click it
