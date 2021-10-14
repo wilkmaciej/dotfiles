@@ -155,6 +155,109 @@ tell application "System Events" to tell application process "System Preferences
 	tell checkbox 1 of tab group 1 of window 1
 		if not (its value as boolean) then click it
 	end tell
+	keystroke "	"
+	delay 0.5
+	keystroke "	"
+	delay 0.5
+	repeat 10 times
+		key code 126
+		delay 0.1
+	end repeat
+	repeat 3 times
+		key code 125
+		delay 0.1
+	end repeat
+	
+	set x to 0
+	
+	repeat until x is equal to (count of rows of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1)
+		set x to x + 1
+		tell checkbox 1 of UI element 1 of row x of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1
+			if (its value as boolean) then click it
+		end tell
+	end repeat
+	
+	repeat 3 times
+		key code 125
+		delay 0.1
+	end repeat
+	
+	set x to 0
+	
+	repeat until x is equal to (count of rows of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1)
+		set x to x + 1
+		tell checkbox 1 of UI element 1 of row x of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1
+			if (its value as boolean) then click it
+		end tell
+	end repeat
+	
+	key code 125
+	delay 0.5
+	
+	set x to 0
+	
+	repeat until x is equal to (count of rows of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1)
+		set x to x + 1
+		try
+			tell checkbox 1 of UI element 1 of row x of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1
+				if (its value as boolean) then click it
+			end tell
+		end try
+	end repeat
+	
+end tell
+delay 1
+tell application "System Preferences" to quit'
+
+# Screenshot shortcut
+
+sudo osascript -e '
+tell application "System Preferences"
+	activate
+	reveal anchor "shortcutsTab" of pane "com.apple.preference.keyboard"
+end tell
+tell application "System Events" to tell application process "System Preferences"
+	delay 1
+	keystroke "	"
+	delay 0.5
+	keystroke "	"
+	delay 0.5
+	repeat 10 times
+		key code 126
+		delay 0.1
+	end repeat
+	repeat 4 times
+		key code 125
+		delay 0.1
+	end repeat
+	set x to 0
+	
+	repeat until x is equal to (count of rows of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1)
+		set x to x + 1
+		tell checkbox 1 of UI element 1 of row x of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1
+			if (its value as boolean) then click it
+		end tell
+	end repeat
+	click checkbox 1 of UI element 1 of row 4 of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1
+	click checkbox 1 of UI element 1 of row 5 of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1
+	delay 1
+	keystroke "	"
+	repeat 3 times
+		key code 125
+	end repeat
+	repeat 2 times
+		keystroke "	"
+	end repeat
+	delay 0.5
+	key code 122 using option down
+	repeat 1 times
+		key code 125
+	end repeat
+	repeat 2 times
+		keystroke "	"
+	end repeat
+	delay 0.5
+	key code 120 using option down
 end tell
 delay 1
 tell application "System Preferences" to quit'
