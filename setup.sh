@@ -6,10 +6,10 @@ sudo -v
 if [[ "$(uname)" =~ Darwin ]]; then
 	#	macOS
 
-	#	Enable TouchID for sudo access
-	if ! grep 'pam_tid.so' /etc/pam.d/sudo --silent; then
-		sudo sed -i -e '1s;^;auth       sufficient     pam_tid.so\n;' /etc/pam.d/sudo
-	fi
+	#	Enable TouchID for sudo access and add daemon to enable it if needed
+	cp ./macos/enablesudotid.sh $HOME/.enablesudotid.sh
+	./macos/enablesudotid.sh
+	sed "s/USER/${USER}/g" ./macos/sudotid.plist | sudo dd of=/Library/LaunchDaemons/sudotid.plist
 
 	#	install CLT for Xcode
 	xcode-select --install
