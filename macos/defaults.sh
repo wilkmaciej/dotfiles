@@ -19,6 +19,12 @@ tell application "System Preferences"
 end tell
 tell application "System Events" to tell application process "System Preferences"
 	delay 1
+
+	display alert "Click element of scroll area to continue" as informational
+
+	repeat until scroll area 1 of window 1 exists
+		delay 0.5
+	end repeat
 	
 	tell scroll area 1 of window 1
 		select row 3 of outline 1
