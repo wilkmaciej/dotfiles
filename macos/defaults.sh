@@ -332,7 +332,7 @@ defaults write com.sindresorhus.Plash "showOnAllSpaces" -bool true
 mkdir -p $HOME/.plash/
 cp ./macos/plash.html $HOME/.plash/index.html
 
-defaults write com.sindresorhus.Plash websites -array '"{\"usePrintStyles\":false,\"isCurrent\":true,\"invertColors2\":\"never\",\"id\":\"7CBC4207-3B90-463C-8935-853FAF0AAA12\",\"title\":\"Stars\",\"css\":\"\",\"javaScript\":\"\",\"invertColors\":false,\"url\":\"file:\\/\\/\\/Users\\/wilkmaciej\\/.plash\\/\"}"'
+defaults write com.sindresorhus.Plash websites -array '"{\"usePrintStyles\":false,\"isCurrent\":true,\"invertColors2\":\"never\",\"id\":\"6E009A39-16FE-4EA8-B262-57F6877B8051\",\"title\":\"stars\",\"css\":\"\",\"javaScript\":\"\",\"invertColors\":false,\"url\":\"file:\\/\\/\\/Users\\/wilkmaciej\\/.plash\"}"'
 
 # Stats
 open /Applications/Stats.app
