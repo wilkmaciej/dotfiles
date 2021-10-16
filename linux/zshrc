@@ -1,3 +1,21 @@
+export ZSH=$HOME/.oh-my-zsh
+
+ZSH_THEME="agnoster"
+
+plugins=(
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	colored-man-pages
+	command-not-found
+	adb
+)
+
+DISABLE_UPDATE_PROMPT=true
+
+source $ZSH/oh-my-zsh.sh
+
+alias p1="ping 1.1.1.1"
+
 alias apt="sudo apt"
 
 xc() {
