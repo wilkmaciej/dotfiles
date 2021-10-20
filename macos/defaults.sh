@@ -9,6 +9,13 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	OpenWith -bool true \
 	Privileges -bool true
 
+defaults write com.apple.finder "NewWindowTarget" -string "PfLo"
+defaults write com.apple.finder "NewWindowTargetPath" -string "file:///Applications/"
+
+defaults write com.apple.finder "SidebarTagsSctionDisclosedState" -bool false
+defaults write com.apple.finder "SidebariCloudDriveSectionDisclosedState" -bool false
+defaults write com.apple.finder "ShowHardDrivesOnDesktop" -bool false
+
 #	System Preferences
 
 #	Dock and menu bar
