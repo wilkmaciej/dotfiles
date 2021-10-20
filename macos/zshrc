@@ -11,7 +11,7 @@ plugins=(
 	osx
 )
 
-DISABLE_UPDATE_PROMPT=true
+DISABLE_AUTO_UPDATE=true
 
 source $ZSH/oh-my-zsh.sh
 
@@ -24,7 +24,7 @@ if [ -f "$HB_CNF_HANDLER" ]; then
 	source "$HB_CNF_HANDLER";
 fi
 
-alias upg="brew update && brew upgrade && mas upgrade && softwareupdate -i -a"
+alias upg="brew update && brew upgrade && mas upgrade && softwareupdate -i -a && omz update"
 
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
