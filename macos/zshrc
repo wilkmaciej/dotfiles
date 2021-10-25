@@ -28,3 +28,7 @@ alias upg="brew update && brew upgrade && mas upgrade && softwareupdate -i -a &&
 
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
+
+c++ () {
+	/usr/bin/c++ -o $(echo $@ | sed 's/\.[^.]*$//') $@
+}
