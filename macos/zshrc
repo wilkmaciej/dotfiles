@@ -8,7 +8,7 @@ plugins=(
 	colored-man-pages
 	command-not-found
 	adb
-	osx
+	macos
 )
 
 DISABLE_AUTO_UPDATE=true
