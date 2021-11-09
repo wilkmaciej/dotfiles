@@ -38,10 +38,11 @@ android-file-transfer
 android-platform-tools
 balenaetcher
 chrome-remote-desktop-host
+discord
+free-download-manager
 google-chrome
 gpg-suite
-inssider
-inssider
+iperf3
 nrlquaker-winbox
 raycast
 rectangle
@@ -49,6 +50,7 @@ spotify
 stats
 visual-studio-code
 vlc
+webtorrent
 wireshark
 ' | xargs -n1 brew install --cask
 
@@ -91,6 +93,8 @@ echo '
 1295203466	Microsoft Remote Desktop
 1494023538	Plash
 1543920362	Displaperture
+494803304	WiFi Explorer
+497799835	Xcode
 595191960	CopyClip
 824183456	Affinity Photo
 ' | awk '{ print $1 }' | xargs -n1 mas install
@@ -110,7 +114,6 @@ cp ./macos/zshrc $HOME/.zshrc
 echo '
 aaron-bond.better-comments
 christian-kohler.path-intellisense
-CoenraadS.bracket-pair-colorizer-2
 dbaeumer.vscode-eslint
 eamodio.gitlens
 esbenp.prettier-vscode
