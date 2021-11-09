@@ -376,3 +376,4 @@ osascript -e 'tell application "System Events" to make login item with propertie
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Stats.app", hidden:true}'
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Plash.app", hidden:true}'
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Rectangle.app", hidden:true}'
+osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Raycast.app", hidden:true}'
