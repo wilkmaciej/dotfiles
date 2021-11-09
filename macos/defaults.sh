@@ -133,7 +133,7 @@ end tell
 delay 1
 tell application "System Preferences" to quit'
 
-#	Enable F keys insted of media keys, change repet speed to max, key globe change input source, enable keyboard navigation
+#	Enable F keys insted of media keys, change repeat speed to max, key globe change input source, enable keyboard navigation
 osascript -e '
 tell application "System Preferences"
 	activate
