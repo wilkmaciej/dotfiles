@@ -216,8 +216,7 @@ end tell
 delay 1
 tell application "System Preferences" to quit'
 
-# Screenshot shortcut
-
+#	Screenshot shortcut
 sudo osascript -e '
 tell application "System Preferences"
 	activate
@@ -296,7 +295,6 @@ end tell
 delay 1
 tell application "System Preferences" to quit'
 
-
 #	Dont dim on battery power
 osascript -e '
 tell application "System Preferences"
@@ -341,7 +339,7 @@ cp ./macos/plash.html $HOME/.plash/index.html
 
 defaults write com.sindresorhus.Plash websites -array '"{\"usePrintStyles\":false,\"isCurrent\":true,\"invertColors2\":\"never\",\"id\":\"6E009A39-16FE-4EA8-B262-57F6877B8051\",\"title\":\"stars\",\"css\":\"\",\"javaScript\":\"\",\"invertColors\":false,\"url\":\"file:\\/\\/\\/Users\\/wilkmaciej\\/.plash\"}"'
 
-# Stats
+#	Stats
 open /Applications/Stats.app
 sleep 1
 killall Stats
@@ -367,10 +365,9 @@ defaults write com.knollsoft.Rectangle "SUHasLaunchedBefore" -int 1
 defaults write com.knollsoft.Rectangle "hideMenubarIcon" -int 1
 open /Applications/Rectangle.app
 
-# delete all items
+#	Delete all login items and add new ones
 sudo osascript -e 'tell application "System Events" to delete every login item'
 
-# add login items
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Displaperture.app", hidden:true}'
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/CopyClip.app", hidden:true}'
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Stats.app", hidden:true}'
