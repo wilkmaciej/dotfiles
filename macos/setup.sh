@@ -138,6 +138,10 @@ VS_CODE_DIR=$HOME/Library/Application\ Support/Code/User/
 mkdir -p $VS_CODE_DIR
 cp ./vscode/* $VS_CODE_DIR
 
+#	Disable Crash Reporter
+launchctl unload -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist
+
 ./macos/defaults.sh
 
 osascript -e 'display alert "Setup complete" as informational'
