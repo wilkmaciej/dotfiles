@@ -31,6 +31,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 brew update
 brew upgrade
 
+#	chmod needed for brew completion
+chmod -R go-w "$(brew --prefix)/share"
+
 #	install brew apps
 echo '
 alt-tab
@@ -109,6 +112,7 @@ open ./macos/Argonaut.terminal && osascript -e 'delay 1' -e 'tell application "T
 defaults write com.apple.terminal "Default Window Settings" "Argonaut"
 defaults write com.apple.terminal "Startup Window Settings" "Argonaut"
 cp ./macos/zshrc $HOME/.zshrc
+cp ./macos/zprofile $HOME/.zprofile
 
 #	install vs code extensions
 echo '
