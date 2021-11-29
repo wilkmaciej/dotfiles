@@ -23,5 +23,7 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
 c++ () {
-	/usr/bin/c++ -o $(echo $@ | sed 's/\.[^.]*$//') $@
+	out=$(echo $@ | sed 's/\.[^.]*$//')
+	/usr/bin/c++ -o $out $@
+	./$out
 }
