@@ -17,8 +17,6 @@ source $ZSH/oh-my-zsh.sh
 
 alias p1="ping 1.1.1.1"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 alias upg="brew update && brew upgrade && mas upgrade && softwareupdate -i -a && omz update"
 
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
