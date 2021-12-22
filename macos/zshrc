@@ -15,6 +15,8 @@ DISABLE_AUTO_UPDATE=true
 
 source $ZSH/oh-my-zsh.sh
 
+$HOME/.enablesudotid.sh
+
 alias p1="ping 1.1.1.1"
 
 alias upg="brew update && brew upgrade && mas upgrade && softwareupdate -i -a && omz update"
