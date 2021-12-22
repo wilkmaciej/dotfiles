@@ -3,10 +3,9 @@
 #	ask for sudo acces at start
 sudo -v
 
-#	Enable TouchID for sudo access and add daemon to enable it if needed
+#	Enable TouchID for sudo access
 cp ./macos/enablesudotid.sh $HOME/.enablesudotid.sh
 ./macos/enablesudotid.sh
-sed "s/USER/${USER}/g" ./macos/sudotid.plist | sudo dd of=/Library/LaunchDaemons/sudotid.plist
 
 #	install CLT for Xcode
 xcode-select --install
