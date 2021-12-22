@@ -104,6 +104,7 @@ echo '
 497799835	Xcode
 595191960	CopyClip
 824183456	Affinity Photo
+937984704	Amphetamine
 ' | awk '{ print $1 }' | xargs -n1 mas install
 
 #	install zsh
