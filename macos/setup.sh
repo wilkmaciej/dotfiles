@@ -41,6 +41,7 @@ android-platform-tools
 balenaetcher
 chrome-remote-desktop-host
 discord
+docker
 free-download-manager
 google-chrome
 gpg-suite
@@ -48,26 +49,30 @@ iperf3
 nrlquaker-winbox
 raycast
 rectangle
+slack
 spotify
 stats
+tableplus
 visual-studio-code
 vlc
 webtorrent
+wine-stable
 wireshark
 ' | xargs -n1 brew install --cask
 
 echo '
 arp-scan
+arping
 binutils
-eslint
 gobuster
+docker-compose
+iperf3
 mas
 nmap
 node
 screen
 sleepwatcher
 telnet
-typescript
 watch
 wget
 zsh-completions
