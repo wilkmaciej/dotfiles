@@ -98,7 +98,7 @@ end tell
 delay 1
 tell application "System Preferences" to quit'
 
-#	Enable automatic updates
+#	Disable automatic updates
 osascript -e '
 tell application "System Preferences"
 	activate
@@ -106,8 +106,13 @@ tell application "System Preferences"
 end tell
 tell application "System Events" to tell application process "System Preferences"
 	delay 1
-	tell group 2 of window 1 to tell checkbox 1
-		if not (its value as boolean) then click it
+	tell window 1
+		tell group 2
+			click button 3
+		end tell
+		tell sheet 1 to tell checkbox 1
+			if (its value as boolean) then click it
+		end tell
 	end tell
 end tell
 delay 1
