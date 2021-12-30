@@ -53,6 +53,7 @@ slack
 spotify
 stats
 tableplus
+tableplus
 visual-studio-code
 vlc
 webtorrent
