@@ -21,6 +21,8 @@ alias p1="ping 1.1.1.1"
 
 alias upg="brew update && brew upgrade && mas upgrade && softwareupdate -i -a && omz update"
 
+alias ipme="curl -s ip.me | tee >(pbcopy)"
+
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 

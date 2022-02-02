@@ -40,8 +40,8 @@ android-file-transfer
 android-platform-tools
 balenaetcher
 chrome-remote-desktop-host
+cyberduck
 discord
-docker
 free-download-manager
 google-chrome
 gpg-suite
@@ -53,7 +53,7 @@ slack
 spotify
 stats
 tableplus
-tableplus
+the-unarchiver
 visual-studio-code
 vlc
 webtorrent
@@ -66,11 +66,11 @@ arp-scan
 arping
 binutils
 gobuster
-docker-compose
 iperf3
 mas
 nmap
 node
+scrcpy
 screen
 sleepwatcher
 telnet
@@ -100,10 +100,8 @@ osascript -e 'delay 1' -e 'tell application "App Store" to quit'
 echo '
 1295203466	Microsoft Remote Desktop
 1494023538	Plash
-1543920362	Displaperture
 494803304	WiFi Explorer
 497799835	Xcode
-595191960	CopyClip
 824183456	Affinity Photo
 937984704	Amphetamine
 ' | awk '{ print $1 }' | xargs -n1 mas install
