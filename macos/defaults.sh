@@ -362,9 +362,9 @@ defaults write eu.exelban.Stats "update-interval" -string "Once per day"
 open /Applications/Stats.app
 
 defaults write com.knollsoft.Rectangle "snapEdgeMarginTop" -int 50
-defaults write com.knollsoft.Rectangle "snapEdgeMarginBottom" -int 10
-defaults write com.knollsoft.Rectangle "snapEdgeMarginLeft" -int 10
-defaults write com.knollsoft.Rectangle "snapEdgeMarginRight" -int 10
+defaults write com.knollsoft.Rectangle "snapEdgeMarginBottom" -int 50
+defaults write com.knollsoft.Rectangle "snapEdgeMarginLeft" -int 50
+defaults write com.knollsoft.Rectangle "snapEdgeMarginRight" -int 50
 defaults write com.knollsoft.Rectangle "launchOnLogin" -int 0
 defaults write com.knollsoft.Rectangle "SUHasLaunchedBefore" -int 1
 defaults write com.knollsoft.Rectangle "hideMenubarIcon" -int 1
@@ -374,7 +374,6 @@ open /Applications/Rectangle.app
 sudo osascript -e 'tell application "System Events" to delete every login item'
 
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Displaperture.app", hidden:true}'
-osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/CopyClip.app", hidden:true}'
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Stats.app", hidden:true}'
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Plash.app", hidden:true}'
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Rectangle.app", hidden:true}'
