@@ -7,6 +7,7 @@ defaults write com.apple.desktopservices "DSDontWriteUSBStores" -bool true
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	General -bool true \
 	OpenWith -bool true \
+	Preview -bool false \
 	Privileges -bool true
 
 defaults write com.apple.finder "NewWindowTarget" -string "PfLo"
@@ -17,6 +18,21 @@ defaults write com.apple.finder "SidebariCloudDriveSectionDisclosedState" -bool 
 defaults write com.apple.finder "ShowHardDrivesOnDesktop" -bool false
 
 #	System Preferences
+
+osascript -e '
+tell application "System Preferences"
+	activate
+	reveal anchor "Privacy" of pane id "com.apple.preference.security"
+end tell
+
+tell application "System Events" to tell application process "System Preferences"
+	delay 1
+
+	display alert "Enable Accesability access for terminal and confirm" as informational
+
+end tell
+delay 1
+tell application "System Preferences" to quit'
 
 #	Dock and menu bar
 osascript -e '
@@ -32,7 +48,16 @@ tell application "System Events" to tell application process "System Preferences
 	repeat until scroll area 1 of window 1 exists
 		delay 0.5
 	end repeat
+
 	
+	tell scroll area 1 of window 1
+		select row 1 of outline 1
+	end tell
+	delay 0.5
+	tell checkbox 6 of window 1
+		if (its value as boolean) then click it
+	end tell
+	delay 0.5
 	tell scroll area 1 of window 1
 		select row 3 of outline 1
 	end tell
@@ -87,16 +112,23 @@ tell application "System Preferences"
 	reveal anchor "General" of pane id "com.apple.preference.security"
 end tell
 tell application "System Events" to tell application process "System Preferences"
-	tell tab group 1 of window 1
-		tell pop up button 1
-			click
-			delay 0.5
-			click menu item 1 of menu 1
-		end tell
+	delay 1
+
+	tell pop up button 1 of tab group 1 of window 1
+		click
+		delay 0.5
+		click menu item 1 of menu 1
 	end tell
 end tell
 delay 1
-tell application "System Preferences" to quit'
+repeat while true
+	try
+		tell application "System Preferences" to quit
+		exit repeat
+	on error
+		delay 5
+	end try
+end repeat'
 
 #	Disable automatic updates
 osascript -e '
@@ -106,6 +138,7 @@ tell application "System Preferences"
 end tell
 tell application "System Events" to tell application process "System Preferences"
 	delay 1
+
 	tell window 1
 		tell group 2
 			click button 3
@@ -116,7 +149,14 @@ tell application "System Events" to tell application process "System Preferences
 	end tell
 end tell
 delay 1
-tell application "System Preferences" to quit'
+repeat while true
+	try
+		tell application "System Preferences" to quit
+		exit repeat
+	on error
+		delay 5
+	end try
+end repeat'
 
 #	Sound
 osascript -e '
@@ -125,6 +165,8 @@ tell application "System Preferences"
 	reveal anchor "effects" of pane id "com.apple.preference.sound"
 end tell
 tell application "System Events" to tell application process "System Preferences"
+	delay 1
+
 	tell checkbox 2 of window 1
 		if (its value as boolean) then click it
 	end tell
@@ -146,6 +188,7 @@ tell application "System Preferences"
 end tell
 tell application "System Events" to tell application process "System Preferences"
 	delay 1
+
 	tell tab group 1 of window 1
 		set value of every slider to 10
 		tell pop up button 2
@@ -164,6 +207,7 @@ tell application "System Preferences"
 end tell
 tell application "System Events" to tell application process "System Preferences"
 	delay 1
+
 	tell checkbox 1 of tab group 1 of window 1
 		if not (its value as boolean) then click it
 	end tell
@@ -229,6 +273,7 @@ tell application "System Preferences"
 end tell
 tell application "System Events" to tell application process "System Preferences"
 	delay 1
+
 	keystroke "	"
 	delay 0.5
 	keystroke "	"
@@ -261,7 +306,7 @@ tell application "System Events" to tell application process "System Preferences
 	end repeat
 	delay 0.5
 	key code 122 using option down
-	repeat 1 times
+	repeat 4 times
 		key code 125
 	end repeat
 	repeat 2 times
@@ -281,21 +326,21 @@ tell application "System Preferences"
 end tell
 tell application "System Events" to tell application process "System Preferences"
 	delay 1
-	try
-		tell group 1 of window 1 to tell tab group 1
+	tell group 1 of window 1
+		repeat until radio group 1 exists
+			delay 0.5
+		end repeat
+		tell radio group 1
 			click radio button "Scaled"
-			tell radio group 1 of group 1
-				click radio button 4
-			end tell
 		end tell
-	on error
-		tell tab group 1 of window 1
-			click radio button "Scaled"
-			tell radio group 1 of group 1
-				click radio button 4
-			end tell
+		delay 0.5
+		try
+			click button "Resolution1" of UI element 3
+		end try
+		tell checkbox 1
+			if (its value as boolean) then click it
 		end tell
-	end try
+	end tell
 end tell
 delay 1
 tell application "System Preferences" to quit'
@@ -307,7 +352,7 @@ tell application "System Preferences"
 	set the current pane to pane id "com.apple.preference.battery"
 end tell
 tell application "System Events" to tell application process "System Preferences"
-	delay 0.5
+	delay 1
 	tell scroll area 1 of window 1
 		select row 2 of table 1
 	end tell
@@ -325,7 +370,7 @@ defaults delete com.apple.dock "persistent-apps"
 defaults write com.apple.dock "minimize-to-application" -bool true
 defaults write com.apple.dock "show-recents" -bool false
 defaults write com.apple.dock "autohide" -bool true
-defaults write com.apple.dock "tilesize" -int 50
+defaults write com.apple.dock "tilesize" -int 75
 killall Dock
 
 #	Use AirDrop over every interface
@@ -346,7 +391,10 @@ defaults write com.sindresorhus.Plash websites -array '"{\"usePrintStyles\":fals
 
 #	Stats
 open /Applications/Stats.app
-sleep 1
+sudo osascript -e '
+repeat until application "Stats" is running
+	delay 0.5
+end repeat'
 killall Stats
 defaults write eu.exelban.Stats "BAT_mini_color" -string "system"
 defaults write eu.exelban.Stats "BAT_mini_label" -bool false
@@ -370,11 +418,16 @@ defaults write com.knollsoft.Rectangle "SUHasLaunchedBefore" -int 1
 defaults write com.knollsoft.Rectangle "hideMenubarIcon" -int 1
 open /Applications/Rectangle.app
 
+defaults write com.raycast.macos "onboardingSkipped" -int 1
+defaults write com.raycast.macos "raycastGlobalHotkey" -string "Command-49"
+defaults write com.raycast.macos "NSStatusItem Visible raycastIcon" -int 0
+defaults write com.raycast.macos "popToRootTimeout" -int 0
+defaults write com.raycast.macos "boostRankingByPreviousSearches" -int 1
+open /Applications/Raycast.app
+
 #	Delete all login items and add new ones
 sudo osascript -e 'tell application "System Events" to delete every login item'
 
-osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Displaperture.app", hidden:true}'
-osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Stats.app", hidden:true}'
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Plash.app", hidden:true}'
 osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Rectangle.app", hidden:true}'
-osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Raycast.app", hidden:true}'
+osascript -e 'tell application "System Events" to make login item with properties {path:"Applications/Stats.app", hidden:true}'
