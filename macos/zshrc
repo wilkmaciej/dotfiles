@@ -19,7 +19,7 @@ $HOME/.enablesudotid.sh
 
 alias p1="ping 1.1.1.1"
 
-alias upg="brew update && brew upgrade && mas upgrade && softwareupdate -i -a && omz update"
+alias upg="brew update && brew upgrade && mas upgrade && omz update && softwareupdate -i -a"
 
 alias ipme="curl -s ip.me | tee >(pbcopy)"
 
