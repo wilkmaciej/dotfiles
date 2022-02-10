@@ -383,11 +383,10 @@ sudo systemsetup -setrestartfreeze on
 defaults write com.sindresorhus.Plash "SS_hasLaunched" -bool true
 defaults write com.sindresorhus.Plash "hideMenuBarIcon" -bool true
 defaults write com.sindresorhus.Plash "showOnAllSpaces" -bool true
-
 mkdir -p $HOME/.plash/
 cp ./macos/plash.html $HOME/.plash/index.html
-
 defaults write com.sindresorhus.Plash websites -array '"{\"usePrintStyles\":false,\"isCurrent\":true,\"invertColors2\":\"never\",\"id\":\"6E009A39-16FE-4EA8-B262-57F6877B8051\",\"title\":\"stars\",\"css\":\"\",\"javaScript\":\"\",\"invertColors\":false,\"url\":\"file:\\/\\/\\/Users\\/wilkmaciej\\/.plash\"}"'
+open /Applications/Plash.app
 
 #	Stats
 open /Applications/Stats.app
@@ -409,6 +408,7 @@ defaults write eu.exelban.Stats "RAM_state" -bool false
 defaults write eu.exelban.Stats "update-interval" -string "Once per day"
 open /Applications/Stats.app
 
+# 	Rectangle
 defaults write com.knollsoft.Rectangle "snapEdgeMarginTop" -int 50
 defaults write com.knollsoft.Rectangle "snapEdgeMarginBottom" -int 50
 defaults write com.knollsoft.Rectangle "snapEdgeMarginLeft" -int 50
@@ -418,12 +418,21 @@ defaults write com.knollsoft.Rectangle "SUHasLaunchedBefore" -int 1
 defaults write com.knollsoft.Rectangle "hideMenubarIcon" -int 1
 open /Applications/Rectangle.app
 
+#	Raycast
 defaults write com.raycast.macos "onboardingSkipped" -int 1
 defaults write com.raycast.macos "raycastGlobalHotkey" -string "Command-49"
 defaults write com.raycast.macos "NSStatusItem Visible raycastIcon" -int 0
 defaults write com.raycast.macos "popToRootTimeout" -int 0
 defaults write com.raycast.macos "boostRankingByPreviousSearches" -int 1
 open /Applications/Raycast.app
+
+#	Alt Tab
+defaults write com.lwouis.alt-tab-macos "menubarIcon" -int 3
+defaults write com.lwouis.alt-tab-macos "holdShortcut" -string "\\U2318"
+defaults write com.lwouis.alt-tab-macos "hideWindowlessApps" -bool true
+defaults write com.lwouis.alt-tab-macos "updatePolicy" -int 2
+defaults write com.lwouis.alt-tab-macos "crashPolicy" -int 2
+open /Applications/AltTab.app
 
 #	Delete all login items and add new ones
 sudo osascript -e 'tell application "System Events" to delete every login item'
