@@ -7,6 +7,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Stars</title>
 	<script>
+		const min_size = 1;
+		const max_size = 6;
+		const count_factor = 5;
+		const star_count = window.innerHeight * window.innerWidth*count_factor/10000;
+		const background_colors = ['#baa002', '#0000ff']
+		const times = [40, 60]
 		randomInt = (a = 0, b) => {
 			if (b == undefined) {
 				b = a
@@ -21,21 +27,19 @@
 			const clock = document.body.appendChild(document.createElement('span'))
 			clock.classList.add('clock')
 
-			const colors = ['#baa002', '#0000ff']
-
 			const starParent = document.body.appendChild(document.createElement('span'))
 			starParent.classList.add('stars')
 
-			const times = [40, 60]
-
-			while (starParent.children.length < 200) {
+			while (starParent.children.length < star_count) {
 				const star = starParent.appendChild(document.createElement('span'))
-				const size = weightedRandomInt(1, 6, 5)
+				const size = weightedRandomInt(min_size, max_size, 5)
+				const size_ratio = (size - 1) / (max_size-1)
 				star.style.width = size + 'px'
 				star.style.height = size + 'px'
 				star.style.left = randomInt(100 * 100) / 100 + 'vw'
+				star.style.opacity = ratio(0.1, 1, size_ratio)
 
-				const duration = ratio(times[0], times[1], (size - 1) / 5) * 1000
+				const duration = ratio(times[0], times[1], size_ratio) * 1000
 
 				const starAnimation = new Animation(new KeyframeEffect(
 					star,
@@ -54,15 +58,11 @@
 				starAnimation.onfinish = () => starAnimation.currentTime = duration
 			}
 
-			// let minutes = 0
 			let lastDate = false
 			setInterval(() => {
 				const now = new Date();
 				if (lastDate && lastDate.getSeconds() == now.getSeconds()) return
 				lastDate = now
-				// now.setHours(12, 0, 0)
-				// now.setHours(parseInt(minutes / 60)%24, minutes % 60, 0)
-				// minutes += 10
 				clock.innerHTML =
 					[
 						now.getHours(),
@@ -75,7 +75,7 @@
 
 				const sunRatio = Math.abs(d12.getTime() - now.getTime()) / 12 / 60 / 60 / 1000
 
-				const color = colors.map(a => a.slice(1).match(/.{1,2}/g).map(a => parseInt(a, 16))).reduce((a, b) => a.map((c, d) => c = Math.sqrt(parseInt((c ** 2 * (1 - sunRatio) + b[d] ** 2 * sunRatio) / 2)))).join(', ')
+				const color = background_colors.map(a => a.slice(1).match(/.{1,2}/g).map(a => parseInt(a, 16))).reduce((a, b) => a.map((c, d) => c = Math.sqrt(parseInt((c ** 2 * (1 - sunRatio) + b[d] ** 2 * sunRatio) / 2)))).join(', ')
 
 				document.body.style.background = `rgb(${color}) radial-gradient(circle at center ${parseInt(ratio(-10, 150, sunRatio))}%, transparent, black 110vh)`
 
