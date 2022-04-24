@@ -18,7 +18,6 @@ defaults write com.apple.finder "SidebariCloudDriveSectionDisclosedState" -bool 
 defaults write com.apple.finder "ShowHardDrivesOnDesktop" -bool false
 
 #	System Preferences
-
 osascript -e '
 tell application "System Preferences"
 	activate
@@ -49,7 +48,6 @@ tell application "System Events" to tell application process "System Preferences
 		delay 0.5
 	end repeat
 
-	
 	tell scroll area 1 of window 1
 		select row 1 of outline 1
 	end tell
@@ -223,35 +221,35 @@ tell application "System Events" to tell application process "System Preferences
 		key code 125
 		delay 0.1
 	end repeat
-	
+
 	set x to 0
-	
+
 	repeat until x is equal to (count of rows of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1)
 		set x to x + 1
 		tell checkbox 1 of UI element 1 of row x of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1
 			if (its value as boolean) then click it
 		end tell
 	end repeat
-	
+
 	repeat 3 times
 		key code 125
 		delay 0.1
 	end repeat
-	
+
 	set x to 0
-	
+
 	repeat until x is equal to (count of rows of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1)
 		set x to x + 1
 		tell checkbox 1 of UI element 1 of row x of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1
 			if (its value as boolean) then click it
 		end tell
 	end repeat
-	
+
 	key code 125
 	delay 0.5
-	
+
 	set x to 0
-	
+
 	repeat until x is equal to (count of rows of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1)
 		set x to x + 1
 		try
@@ -260,7 +258,7 @@ tell application "System Events" to tell application process "System Preferences
 			end tell
 		end try
 	end repeat
-	
+
 end tell
 delay 1
 tell application "System Preferences" to quit'
@@ -287,7 +285,7 @@ tell application "System Events" to tell application process "System Preferences
 		delay 0.1
 	end repeat
 	set x to 0
-	
+
 	repeat until x is equal to (count of rows of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1)
 		set x to x + 1
 		tell checkbox 1 of UI element 1 of row x of outline 1 of scroll area 2 of splitter group 1 of tab group 1 of window 1
@@ -365,7 +363,6 @@ delay 1
 tell application "System Preferences" to quit'
 
 #	Dock
-
 defaults delete com.apple.dock "persistent-apps"
 defaults write com.apple.dock "minimize-to-application" -bool true
 defaults write com.apple.dock "show-recents" -bool false
@@ -375,9 +372,6 @@ killall Dock
 
 #	Use AirDrop over every interface
 defaults write com.apple.NetworkBrowser "BrowseAllInterfaces" 1
-
-#	Restart automatically if the computer freezes
-sudo systemsetup -setrestartfreeze on
 
 #	Plash
 defaults write com.sindresorhus.Plash "SS_hasLaunched" -bool true
@@ -406,6 +400,7 @@ defaults write eu.exelban.Stats "Disk_state" -bool false
 defaults write eu.exelban.Stats "Network_speed_icon" -string "dots"
 defaults write eu.exelban.Stats "RAM_state" -bool false
 defaults write eu.exelban.Stats "update-interval" -string "Once per day"
+defaults write eu.exelban.Stats "Network_usageReset" -string "Once per month"
 open /Applications/Stats.app
 
 # 	Rectangle
