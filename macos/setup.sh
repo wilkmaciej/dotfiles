@@ -31,6 +31,7 @@ balenaetcher
 chrome-remote-desktop-host
 cyberduck
 discord
+disk-drill
 free-download-manager
 google-chrome
 gpg-suite
@@ -53,6 +54,7 @@ echo '
 arp-scan
 arping
 binutils
+git
 gobuster
 iperf3
 mas
@@ -99,6 +101,12 @@ cp ./macos/zprofile $HOME/.zprofile
 #	Disable Crash Reporter
 launchctl unload -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist
+
+#	Keep network active when screen is locked
+sudo pmset -a networkoversleep 1
+
+#	Restart automatically if the computer freezes
+sudo systemsetup -setrestartfreeze on
 
 ./macos/defaults.sh
 
