@@ -10,7 +10,7 @@
 		const min_size = 1;
 		const max_size = 6;
 		const count_factor = 5;
-		const star_count = window.innerHeight * window.innerWidth*count_factor/10000;
+		const star_count = window.innerHeight * window.innerWidth * count_factor / 10000;
 		const background_colors = ['#baa002', '#0000ff']
 		const times = [40, 60]
 		randomInt = (a = 0, b) => {
@@ -33,7 +33,7 @@
 			while (starParent.children.length < star_count) {
 				const star = starParent.appendChild(document.createElement('span'))
 				const size = weightedRandomInt(min_size, max_size, 5)
-				const size_ratio = (size - 1) / (max_size-1)
+				const size_ratio = (size - 1) / (max_size - 1)
 				star.style.width = size + 'px'
 				star.style.height = size + 'px'
 				star.style.left = randomInt(100 * 100) / 100 + 'vw'
@@ -59,6 +59,9 @@
 			}
 
 			let lastDate = false
+
+			const calculated_background_colors = background_colors.map(a => a.slice(1).match(/.{1,2}/g).map(a => parseInt(a, 16)))
+
 			setInterval(() => {
 				const now = new Date();
 				if (lastDate && lastDate.getSeconds() == now.getSeconds()) return
@@ -75,11 +78,17 @@
 
 				const sunRatio = Math.abs(d12.getTime() - now.getTime()) / 12 / 60 / 60 / 1000
 
-				const color = background_colors.map(a => a.slice(1).match(/.{1,2}/g).map(a => parseInt(a, 16))).reduce((a, b) => a.map((c, d) => c = Math.sqrt(parseInt((c ** 2 * (1 - sunRatio) + b[d] ** 2 * sunRatio) / 2)))).join(', ')
+				const color = calculated_background_colors.reduce((a, b) => a.map((c, d) => c = Math.sqrt(parseInt((c ** 2 * (1 - sunRatio) + b[d] ** 2 * sunRatio) / 2)))).join(', ')
 
 				document.body.style.background = `rgb(${color}) radial-gradient(circle at center ${parseInt(ratio(-10, 150, sunRatio))}%, transparent, black 110vh)`
 
-				for (let star of starParent.children) star.getAnimations()[0].playbackRate = sunRatio > 0.5 ? 1 : -1
+				const playbackRate = sunRatio > 0.5 ? 1 : -1
+
+				for (let star of starParent.children) {
+
+					if (star.getAnimations()[0].playbackRate == playbackRate) return
+					star.getAnimations()[0].playbackRate = playbackRate
+				}
 			}, 100)
 		})
 	</script>
