@@ -108,6 +108,9 @@ sudo pmset -a networkoversleep 1
 #	Restart automatically if the computer freezes
 sudo systemsetup -setrestartfreeze on
 
+# Disable spotlight indexing
+sudo mdutil -a -i off
+
 ./macos/defaults.sh
 
 osascript -e 'display alert "Setup complete" as informational'
