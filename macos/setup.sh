@@ -53,7 +53,6 @@ wireshark
 echo '
 arp-scan
 arping
-binutils
 git
 gobuster
 iperf3
