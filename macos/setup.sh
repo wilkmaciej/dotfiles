@@ -3,8 +3,11 @@
 #	ask for sudo access at start
 sudo -v
 
+# copy HOME dotfiles to HOME
+
+for file in ./HOME/*; do rsync -a "$file" $HOME"/."$(basename $file); done
+
 #	Enable TouchID for sudo access
-cp ./macos/enablesudotid.sh $HOME/.enablesudotid.sh
 $HOME/enablesudotid.sh
 
 #	install Rosetta
@@ -89,13 +92,10 @@ sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tool
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
-cp ./macos/JetBrainsMono.ttf $HOME/Library/Fonts
-open ./macos/Argonaut.terminal // TODO
+# TODO open ./macos/Argonaut.terminal
 osascript -e 'delay 1' -e 'tell application "Terminal" to close front window'
 defaults write com.apple.terminal "Default Window Settings" "Argonaut"
 defaults write com.apple.terminal "Startup Window Settings" "Argonaut"
-cp ./macos/zshrc $HOME/.zshrc
-cp ./macos/zprofile $HOME/.zprofile
 
 #	Disable Crash Reporter
 launchctl unload -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist

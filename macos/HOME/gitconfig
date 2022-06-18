@@ -1,0 +1,8 @@
+[user]
+	name = Maciej Wilk
+	email = maciej@cdot.app
+	signingkey = B07D4C244908B526B8F3CB6E78CEEED8D2E6BABC
+[commit]
+	gpgsign = true
+[core]
+	excludesFile = ~/.gitignore

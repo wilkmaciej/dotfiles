@@ -377,8 +377,6 @@ defaults write com.apple.NetworkBrowser "BrowseAllInterfaces" 1
 defaults write com.sindresorhus.Plash "SS_hasLaunched" -bool true
 defaults write com.sindresorhus.Plash "hideMenuBarIcon" -bool true
 defaults write com.sindresorhus.Plash "showOnAllSpaces" -bool true
-mkdir -p $HOME/.plash/
-cp ./macos/plash.html $HOME/.plash/index.html
 defaults write com.sindresorhus.Plash websites -array '"{\"usePrintStyles\":false,\"isCurrent\":true,\"invertColors2\":\"never\",\"id\":\"6E009A39-16FE-4EA8-B262-57F6877B8051\",\"title\":\"stars\",\"css\":\"\",\"javaScript\":\"\",\"invertColors\":false,\"url\":\"file:\\/\\/\\/Users\\/wilkmaciej\\/.plash\"}"'
 open /Applications/Plash.app
 
