@@ -25,64 +25,11 @@ brew upgrade
 #	chmod needed for brew completion
 chmod -R go-w "$(brew --prefix)/share"
 
-#	install brew apps
-echo '
-alt-tab
-android-file-transfer
-android-platform-tools
-balenaetcher
-chrome-remote-desktop-host
-cyberduck
-discord
-disk-drill
-free-download-manager
-google-chrome
-gpg-suite
-nrlquaker-winbox
-raycast
-rectangle
-slack
-spotify
-stats
-tableplus
-the-unarchiver
-visual-studio-code
-vlc
-webtorrent
-wine-stable
-wireshark
-' | xargs -n1 brew install --cask
-
-echo '
-arp-scan
-arping
-git
-gobuster
-iperf3
-mas
-nmap
-node
-scrcpy
-screen
-telnet
-watch
-wget
-zsh-completions
-' | xargs -n1 brew install
-
-brew tap homebrew/command-not-found
-
 #	open AppStore
 mas open
 
-#	install AppStore apps
-echo '
-1295203466	Microsoft Remote Desktop
-1494023538	Plash
-494803304	WiFi Explorer
-824183456	Affinity Photo
-937984704	Amphetamine
-' | awk '{ print $1 }' | xargs -n1 mas install
+#	install apps
+brew bundle
 
 osascript -e 'delay 1' -e 'tell application "App Store" to quit'
 
