@@ -64,7 +64,6 @@ nmap
 node
 scrcpy
 screen
-sleepwatcher
 telnet
 watch
 wget
