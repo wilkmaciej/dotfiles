@@ -1,0 +1,47 @@
+brew "arp-scan"
+brew "arping"
+brew "git"
+brew "gobuster"
+brew "iperf3"
+brew "mas"
+brew "nmap"
+brew "node"
+brew "scrcpy"
+brew "screen"
+brew "telnet"
+brew "watch"
+brew "wget"
+brew "zsh-completions"
+
+cask "alt-tab"
+cask "android-file-transfer"
+cask "android-platform-tools"
+cask "balenaetcher"
+cask "chrome-remote-desktop-host"
+cask "cyberduck"
+cask "discord"
+cask "disk-drill"
+cask "free-download-manager"
+cask "google-chrome"
+cask "gpg-suite"
+cask "nrlquaker-winbox"
+cask "raycast"
+cask "rectangle"
+cask "slack"
+cask "spotify"
+cask "stats"
+cask "tableplus"
+cask "the-unarchiver"
+cask "visual-studio-code"
+cask "vlc"
+cask "webtorrent"
+cask "wine-stable"
+cask "wireshark"
+
+tap "homebrew/command-not-found"
+
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Plash", id: 1494023538
+mas "WiFi Explorer", id: 494803304
+mas "Affinity Photo", id: 824183456
+mas "Amphetamine", id: 937984704
