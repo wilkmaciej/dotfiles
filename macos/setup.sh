@@ -4,7 +4,7 @@
 sudo -v
 
 # copy HOME dotfiles to HOME
-
+# TODO fix Library
 for file in ./HOME/*; do rsync -a "$file" $HOME"/."$(basename $file); done
 
 #	Enable TouchID for sudo access
