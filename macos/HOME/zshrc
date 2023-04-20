@@ -19,14 +19,28 @@ $HOME/.enablesudotid.sh
 
 alias p1="ping 1.1.1.1"
 
-alias upg="brew update && brew upgrade && brew cleanup --prune=all && tldr -u && mas upgrade && softwareupdate -i -a && omz update"
-
 alias ipme="curl -s ip.me | tee >(pbcopy)"
 
 alias rnd="cat /dev/urandom | head -n 10 | md5 | tr -d \"\n\r\" | pbcopy"
 
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
+
+upg () {
+	brew update
+	brew upgrade
+	brew cleanup --prune=all
+
+	tldr -u
+
+	mas upgrade
+
+	softwareupdate -i -a
+
+	omz update
+
+	echo  # alert
+}
 
 c++ () {
 	out=$(echo $@ | sed 's/\.[^.]*$//')
